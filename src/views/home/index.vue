@@ -51,9 +51,9 @@ export default {
   data(){
     return {
       goodsList:[
-        {title:'',price:'54.9',img:require('../../assets/images/goods04.png')},
-        {title:'',price:'54.9',img:require('../../assets/images/goods05.png')},
-        {title:'',price:'54.9',img:require('../../assets/images/goods03.png')},
+        {title:'蒙牛纯甄红西柚小蛮腰',msg:'230g×10瓶',price:'71.9',img:require('../../assets/images/goods04.png')},
+        {title:'蓝月亮亮白洗衣液6kg',msg:'500g×1瓶',price:'89.9',img:require('../../assets/images/goods05.png')},
+        {title:'新边界五色葡萄干250g',msg:'80g×1袋',price:'6.9',img:require('../../assets/images/goods03.png')}
       ]
     }
   }
@@ -85,7 +85,8 @@ export default {
 }
 .goods-list{
   width: 95%;
-  margin: 20px auto;
+  margin: 0px auto;
+  margin-bottom: 20px;
   text-align: left;
   &>h1{
     padding: 24px 0;
