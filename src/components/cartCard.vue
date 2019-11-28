@@ -1,13 +1,14 @@
 <template>
   <div>
     <van-card
+      @click="goToDetail"
       price="2.00"
       desc="描述信息"  
       title="商品标题"
       thumb="https://img.yzcdn.cn/vant/t-thirt.jpg">
       <div slot="footer" class="card-footer">
         <div class="card-icon">
-          <van-icon name="cart-o" @click="addToCart"/>
+          <van-icon name="cart-o" @click.stop="addToCart"/>
         </div>
       </div>
     </van-card>
@@ -34,6 +35,9 @@ export default {
     }
   },
   methods:{
+    goToDetail(){
+      this.$router.push('/detail')
+    },
     addToCart (){
       this.dropImage = 'https://img.yzcdn.cn/vant/t-thirt.jpg';
       this.showMoveDot = [...this.showMoveDot, true];

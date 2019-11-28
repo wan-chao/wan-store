@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Swiper></Swiper>
+    <Swiper :picArray="picArray"></Swiper>
     <div class="content">
 
       <div class="content-top">
@@ -50,6 +50,14 @@ export default {
   },
   data(){
     return {
+      picArray:[
+        require('../../assets/images/img06.jpg'),
+        require('../../assets/images/img07.jpg'),
+        require('../../assets/images/img08.jpg'),
+        require('../../assets/images/img09.jpg'),
+        require('../../assets/images/img10.jpg'),
+        require('../../assets/images/img11.jpg'),
+      ],
       goodsList:[
         {title:'蒙牛纯甄红西柚小蛮腰',msg:'230g×10瓶',price:'71.9',img:require('../../assets/images/goods04.png')},
         {title:'蓝月亮亮白洗衣液6kg',msg:'500g×1瓶',price:'89.9',img:require('../../assets/images/goods05.png')},

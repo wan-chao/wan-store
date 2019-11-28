@@ -1,12 +1,12 @@
 <template>
-  <div class="recommend-card">
+  <div class="recommend-card" @click="goToDetail">
     <div class="card-header">
       <span>今日疯抢</span>
       <a>查看更多 ></a>
     </div>
     <ul class="card-content">
       <li v-for="item in goodsList" :key="item.title" class="goods-item">
-        <img :src="item.img" width="100%">
+        <img v-lazy="item.img" width="100%">
         <span class="one-line goods-detail">{{item.title}}</span>
         <div class="goods-price">￥ <span>{{item.price}}</span> </div>
       </li>
@@ -25,6 +25,11 @@ export default {
         {title:'楼兰蜜语甜甜枣500g',price:'6.9',img:require('../../assets/images/goods02.png')},
         {title:'新边界五色葡萄干250g',price:'6.9',img:require('../../assets/images/goods03.png')}
       ]
+    }
+  },
+  methods:{
+    goToDetail(){
+      this.$router.push('/detail')
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <div class="goods-card">
-    <img :src="goods.img" width="100%">
+  <div class="goods-card" @click="goToDetail">
+    <img v-lazy="goods.img" width="100%">
     <ul class="goods-info">
       <li class="goods-title">{{goods.title}}</li>
       <li class="goods-msg">{{goods.msg}}</li>
@@ -16,6 +16,11 @@ export default {
   props:['goods'],
   data(){
     return {
+    }
+  },
+  methods:{
+    goToDetail(){
+      this.$router.push('/detail')
     }
   }
 }
