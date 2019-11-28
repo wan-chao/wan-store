@@ -18,7 +18,8 @@ export default {
       routers:[
         {name:'首页',icon:"home-o",url:'/'},
         {name:'分类',icon:"search",url:'/sort'},
-        {name:'我的',icon:"setting-o",url:'/my'},
+        {name:'购物车',icon:"cart-o bottom-cart",url:'/cart'},
+        {name:'我的',icon:"friends-o",url:'/my'},
       ]
     }
   },

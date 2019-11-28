@@ -1,7 +1,7 @@
 <template>
   <div class="recommend-card">
     <div class="card-header">
-      <span>今日推荐</span>
+      <span>今日疯抢</span>
       <a>查看更多 ></a>
     </div>
     <ul class="card-content">
@@ -33,7 +33,7 @@ export default {
 <style lang="less">
 .recommend-card{
   width: 95%;
-  margin: 20px auto;
+  margin: 0px auto;
   padding-bottom: 25px;
   text-align: left;
   border-radius: 20px;

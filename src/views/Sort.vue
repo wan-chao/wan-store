@@ -9,18 +9,16 @@
       </van-col>
       <van-col span="18">
         <div class="sort-content">
-          <GoodsCard></GoodsCard>
+          <CartCard></CartCard>
         </div>
       </van-col>
     </van-row>
-    <Tabbar></Tabbar>
   </div>
 </template>
 
 <script>
-import Tabbar from '../components/tabbar'
 import Sidebar from '../components/sidebar'
-import GoodsCard from '../components/goodsCard'
+import CartCard from '../components/cartCard'
 import {classifyJson} from '../config/config'
 export default {
   data() {
@@ -30,9 +28,8 @@ export default {
     }
   },
   components:{
-    Tabbar,
     Sidebar,
-    GoodsCard
+    CartCard
   },
   computed:{
     classList(){
