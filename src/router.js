@@ -14,7 +14,7 @@ export default new Router({
         {path: '/',name: 'home',component: () => import('./views/home/index.vue')},
         {path: '/sort',name: 'sort',component: () => import('./views/Sort.vue')},
         {path: '/my',name: 'my',component: () => import('./views/My.vue')},
-        {path: '/cart',name: 'cart',component: () => import('./views/Cart.vue')},
+        {path: '/cart',name: 'cart',component: () => import('./views/cart/index.vue')},
       ]
     },
     {

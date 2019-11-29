@@ -2,10 +2,10 @@
   <div>
     <van-card
       @click="goToDetail"
-      price="2.00"
-      desc="描述信息"  
-      title="商品标题"
-      thumb="https://img.yzcdn.cn/vant/t-thirt.jpg">
+      :price="goods.price"
+      :desc="goods.msg"  
+      :title="goods.title"
+      :thumb="goods.img">
       <div slot="footer" class="card-footer">
         <div class="card-icon">
           <van-icon name="cart-o" @click.stop="addToCart"/>
@@ -26,6 +26,7 @@
 
 <script>
 export default {
+  props:['goods'],
   data(){
     return {
       showMoveDot: [], //控制下落的小圆点显示隐藏
@@ -39,7 +40,7 @@ export default {
       this.$router.push('/detail')
     },
     addToCart (){
-      this.dropImage = 'https://img.yzcdn.cn/vant/t-thirt.jpg';
+      this.dropImage = this.goods.img;
       this.showMoveDot = [...this.showMoveDot, true];
       this.elLeft = event.target.getBoundingClientRect().left;
       this.elTop = event.target.getBoundingClientRect().top;

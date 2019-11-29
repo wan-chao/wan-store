@@ -9,7 +9,7 @@
       </van-col>
       <van-col span="18">
         <div class="sort-content">
-          <CartCard></CartCard>
+          <SortCard v-for="(goods,index) in goodsList" :key="index" :goods="goods"></SortCard>
         </div>
       </van-col>
     </van-row>
@@ -18,18 +18,23 @@
 
 <script>
 import Sidebar from '../components/sidebar'
-import CartCard from '../components/cartCard'
+import SortCard from '../components/sortCard'
 import {classifyJson} from '../config/config'
 export default {
   data() {
     return {
       active: 0,
-      sortList:classifyJson
+      sortList:classifyJson,
+      goodsList:[
+        {title:'蒙牛纯甄红西柚小蛮腰',msg:'230g×10瓶',price:'71.9',img:require('../assets/images/goods04.png')},
+        {title:'蓝月亮亮白洗衣液6kg',msg:'500g×1瓶',price:'89.9',img:require('../assets/images/goods05.png')},
+        {title:'新边界五色葡萄干250g',msg:'80g×1袋',price:'6.9',img:require('../assets/images/goods03.png')}
+      ]
     }
   },
   components:{
     Sidebar,
-    CartCard
+    SortCard
   },
   computed:{
     classList(){
