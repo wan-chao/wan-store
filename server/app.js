@@ -10,6 +10,7 @@ const dbConfig = require('./database/config')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const goods = require('./routes/goods')
 
 // error handler
 onerror(app)
@@ -32,6 +33,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(goods.routes(), goods.allowedMethods())
 
 //连接mongodb数据库
 mongoose.connect(dbConfig.dbs,{
