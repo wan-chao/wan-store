@@ -1,7 +1,9 @@
 <template>
   <div class="container">
-    <keep-alive>
-      <router-view/>
+    <keep-alive exclude="cart">
+      <transition name="fade">
+        <router-view/>
+      </transition>
     </keep-alive> 
     <Tabbar></Tabbar>
   </div>

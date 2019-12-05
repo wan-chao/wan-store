@@ -9,11 +9,12 @@ import './assets/style/reset.less'
 import 'lib-flexible'
 
 import { Button,Swipe, SwipeItem,Tabbar, TabbarItem,Tab, Tabs,Sidebar, SidebarItem, Row, Col,Card,Icon,Lazyload,GoodsAction,
-  GoodsActionIcon,GoodsActionButton,Sku,Stepper } from 'vant'
+  GoodsActionIcon,GoodsActionButton,Sku,Stepper,List,Image,Checkbox, CheckboxGroup,Toast,SwipeCell,SubmitBar,ImagePreview,AddressList,AddressEdit } from 'vant'
 Vue.use(Button).use(Swipe).use(SwipeItem).use(Tabbar).use(TabbarItem).use(Tab)
 .use(Tabs).use(Sidebar).use(SidebarItem).use(Row).use(Col).use(Card).use(Icon)
 .use(Lazyload).use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton).use(Sku)
-.use(Stepper);
+.use(Stepper).use(List).use(Image).use(Checkbox).use(CheckboxGroup).use(Toast).use(SwipeCell).use(SubmitBar)
+.use(ImagePreview).use(AddressList).use(AddressEdit);
 
 Vue.config.productionTip = false
 

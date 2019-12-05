@@ -22,17 +22,23 @@
         </div>
       </div>
 
-      <Recommend></Recommend>
+      <Recommend :goodsList="hotGoods"></Recommend>
 
       <div class="goods-list">
         <h1>精品推荐</h1>
-        <van-row gutter="10">
-          <van-col span="12" v-for="(item,index) in goodsList" :key="index">
-            <GoodsCard :goods="item"></GoodsCard>
-          </van-col>
-        </van-row>
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
+          <van-row gutter="10">
+            <van-col span="12" v-for="(item,index) in goodsList" :key="index">
+              <GoodsCard :goods="item"></GoodsCard>
+            </van-col>
+          </van-row>
+        </van-list>
       </div>
-
     </div>
   </div>
 </template>
@@ -41,6 +47,7 @@
 import Swiper from '../../components/swiper'
 import GoodsCard from '../../components/goodsCard'
 import Recommend from './recommend'
+import {hotGoodsList,recommendGoodsList} from '@/api/goods'
 export default {
   name: 'home',
   components: {
@@ -50,20 +57,57 @@ export default {
   },
   data(){
     return {
+      hotGoods:[],
+      page:1,
+      loading: false,
+      finished: false,
       picArray:[
-        require('../../assets/images/img06.jpg'),
         require('../../assets/images/img07.jpg'),
         require('../../assets/images/img08.jpg'),
         require('../../assets/images/img09.jpg'),
         require('../../assets/images/img10.jpg'),
         require('../../assets/images/img11.jpg'),
       ],
-      goodsList:[
-        {title:'蒙牛纯甄红西柚小蛮腰',msg:'230g×10瓶',price:'71.9',img:require('../../assets/images/goods04.png')},
-        {title:'蓝月亮亮白洗衣液6kg',msg:'500g×1瓶',price:'89.9',img:require('../../assets/images/goods05.png')},
-        {title:'新边界五色葡萄干250g',msg:'80g×1袋',price:'6.9',img:require('../../assets/images/goods03.png')}
-      ]
+      goodsList:[]
     }
+  },
+  methods:{
+    //获取首页热门商品
+    getHotGoodsList(){
+      this.loading = false
+      this.finished = false
+      hotGoodsList().then(res=>{
+        // console.log(res)
+        if(res.code === 200){
+          this.hotGoods = res.data.slice(0,3)
+        }
+      })
+    },
+    //获取推荐商品
+    getRecommendList(){
+      recommendGoodsList(this.page).then(res=>{
+        console.log(res)
+        if(res.code==200 && res.data.length){
+          this.page++
+          this.goodsList = this.goodsList.concat(res.data)
+        }else{
+          this.finished = true
+        }
+        // 加载状态结束
+        this.loading = false;
+      })
+    },
+    onLoad() {
+      // 异步更新数据
+      setTimeout(() => {
+        this.getRecommendList()
+      }, 1000);
+    }
+  },
+  mounted(){
+    this.page = Math.floor(Math.random()*50)
+    this.getHotGoodsList()
+    this.getRecommendList()
   }
 }
 </script>

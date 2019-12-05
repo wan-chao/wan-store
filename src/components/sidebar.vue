@@ -1,6 +1,6 @@
 <template>
-  <van-sidebar v-model="activeKey">
-    <van-sidebar-item v-for="item in classify" :key="item.type" :title="item.title" />
+  <van-sidebar v-model="activeKey" @change="siderbarChange">
+    <van-sidebar-item v-for="item in classify" :key="item.ID" :title="item.MALL_SUB_NAME" />
   </van-sidebar>
 </template>
 
@@ -20,6 +20,9 @@ export default {
   methods:{
     setActiveKey(val){
       this.activeKey = val
+    },
+    siderbarChange(index){
+      this.$emit('change',this.classify[index].ID)
     }
   },
   mounted(){

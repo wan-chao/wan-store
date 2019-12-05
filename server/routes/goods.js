@@ -155,6 +155,21 @@ router.get('/getHotGoodsList',async(ctx)=>{
 })
 
 
+//通过商品ID数组获取多个商品
+router.post('/getGoodsListByIdList',async(ctx)=>{
+  try{
+    let ids = ctx.request.body.ids
+    let result = await Goods.find({ID:{"$in":ids}}).exec()
+    ctx.body={code:200,data:result}
+  }catch(error){
+    ctx.body = {
+      code:500,
+      message:error
+    }
+  }
+})
+
+
 
 
 

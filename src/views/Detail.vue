@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <Swiper :autoplay="false" :autoHeight="true" :picArray="detailInfo.privewImgs"></Swiper>
+    <img :src="detailInfo.IMAGE1" alt="" class="detail-top-img">
     <div class="detail-content">
       <ul class="detail-info">
-        <li class="goods-price price-color">￥<span>{{detailInfo.price}}</span></li>
-        <li class="goods-title">{{detailInfo.title}}</li>
-        <li class="goods-model">{{detailInfo.msg}}</li>
+        <li class="goods-price price-color">￥<span>{{detailInfo.ORI_PRICE}}</span></li>
+        <li class="goods-title">{{detailInfo.NAME}}</li>
+        <!-- <li class="goods-model">{{detailInfo.msg}}</li> -->
       </ul>
 
       <van-tabs v-model="active" sticky swipeable line-height="2">
         <van-tab title="商品详情">
-          <img  v-for="(img,index) in detailInfo.picArray" :key="img" v-lazy="img" width="100%">
+          <div v-html="detailInfo.DETAIL"></div>
         </van-tab>
         <van-tab title="评价">
           评价正在开发中...
@@ -30,41 +30,64 @@
 </template>
 
 <script>
-import Swiper from '../components/swiper'
 import MSku from '../components/mSku'
+import {detailGoodsInfo} from '@/api/goods'
 export default {
   data() {
     return {
       active:0,
       showCart:true, //显示加入购物车按钮
-      detailInfo:{title:'新边界五色葡萄干250g',msg:'80g×1袋',price:'6.9',
-        privewImgs:[require('../assets/images/goods03.png')],
-        picArray:[
-          require('../assets/images/detail01.png'),
-          require('../assets/images/detail02.png'),
-          require('../assets/images/detail03.png'),
-          require('../assets/images/detail04.png'),
-          require('../assets/images/detail05.png'),
-          require('../assets/images/detail06.png'),
-        ]
-      },
+      detailInfo:{},
     }
   },
   components:{
-    Swiper,MSku
+    MSku
   },
   computed:{
   },
   methods:{
+    getGoodsInfo(){
+      detailGoodsInfo(this.goodsId).then(res=>{
+        console.log(res)
+        if(res.code == 200){
+          this.detailInfo = res.data
+        }
+      })
+    },
     //加入购物车
     onPutCart(){
-      this.showCart = true
-      this.$refs.sku.toggleShow(true)
+      // this.showCart = true
+      // this.$refs.sku.toggleShow(true)
+      let jsonDataGoods = localStorage.getItem('cartGoods')
+      let cartGoodsList = jsonDataGoods?JSON.parse(jsonDataGoods):[]
+      let index = cartGoodsList.findIndex(value=>{
+        return value.ID == this.detailInfo.ID
+      })
+      if(index<0){
+        cartGoodsList.push({
+          ID:this.detailInfo.ID,
+          NAME:this.detailInfo.NAME,
+          ORI_PRICE:this.detailInfo.ORI_PRICE,
+          IMAGE1:this.detailInfo.IMAGE1,
+          NUM:1
+        })
+        new Promise((resolve, reject)=>{
+          localStorage.setItem('cartGoods',JSON.stringify(cartGoodsList))
+          setTimeout(()=>{
+            resolve();
+          },200)
+        }).then(()=>{
+          this.$toast.success('添加成功');
+        })
+      }else{
+        this.$toast.fail('您已添加过该商品');
+      }
     },
     //购买商品
     onBuyGoods(){
-      this.showCart = false
-      this.$refs.sku.toggleShow(true)
+      // this.showCart = false
+      // this.$refs.sku.toggleShow(true)
+      this.$router.push({path:'/order',query:{ids:this.detailInfo.ID,price:this.detailInfo.ORI_PRICE}})
     },
     //跳转到购物车页面
     goToCart(){
@@ -72,6 +95,8 @@ export default {
     }
   },
   mounted() {
+    this.goodsId = this.$route.query.id?this.$route.query.id:null
+    this.goodsId && this.getGoodsInfo()
   },
 }
 </script>
@@ -81,6 +106,9 @@ export default {
   width: 100%;
   padding-bottom: 120px;
   text-align: left;
+}
+.detail-top-img{
+  width: 100%;
 }
 .detail-info{
   width: 95%;
@@ -95,7 +123,7 @@ export default {
   }
 }
 .goods-title{
-  margin-top: 10px;
+  padding: 10px 0;
   font-size: 28px;
   color: #051B28;
 }

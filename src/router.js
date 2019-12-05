@@ -22,6 +22,21 @@ export default new Router({
       name: 'detail',
       component: () => import('./views/Detail.vue'),
     },
+    {
+      path: '/order',
+      name: 'order',
+      component: () => import('./views/order/index.vue'),
+    },
+    {
+      path: '/editorAddress',
+      name: 'editorAddress',
+      component: () => import('./views/EditorAddress.vue'),
+    },
+    {
+      path: '/createAddress',
+      name: 'createAddress',
+      component: () => import('./views/CreateAddress.vue'),
+    }
     // {
     //   path: '/',
     //   name: 'home',

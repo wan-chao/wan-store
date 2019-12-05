@@ -2,10 +2,10 @@
   <div>
     <van-card
       @click="goToDetail"
-      :price="goods.price"
-      :desc="goods.msg"  
-      :title="goods.title"
-      :thumb="goods.img">
+      :price="goods.ORI_PRICE"
+      desc=""  
+      :title="goods.NAME"
+      :thumb="goods.IMAGE1">
       <div slot="footer" class="card-footer">
         <div class="card-icon">
           <van-icon name="cart-o" @click.stop="addToCart"/>
@@ -37,13 +37,30 @@ export default {
   },
   methods:{
     goToDetail(){
-      this.$router.push('/detail')
+      this.$router.push({path:'/detail',query:{id:this.goods.ID}})
     },
     addToCart (){
-      this.dropImage = this.goods.img;
-      this.showMoveDot = [...this.showMoveDot, true];
-      this.elLeft = event.target.getBoundingClientRect().left;
-      this.elTop = event.target.getBoundingClientRect().top;
+      let jsonDataGoods = localStorage.getItem('cartGoods')
+      let cartGoodsList = jsonDataGoods?JSON.parse(jsonDataGoods):[]
+      let index = cartGoodsList.findIndex(value=>{
+        return value.ID == this.goods.ID
+      })
+      if(index<0){
+        cartGoodsList.push({
+          ID:this.goods.ID,
+          NAME:this.goods.NAME,
+          ORI_PRICE:this.goods.ORI_PRICE,
+          IMAGE1:this.goods.IMAGE1,
+          NUM:1
+        })
+        localStorage.setItem('cartGoods',JSON.stringify(cartGoodsList))
+        this.dropImage = this.goods.IMAGE1;
+        this.showMoveDot = [...this.showMoveDot, true];
+        this.elLeft = event.target.getBoundingClientRect().left;
+        this.elTop = event.target.getBoundingClientRect().top;
+      }else{
+        this.$toast.fail('您已添加过该商品');
+      }
     },
     beforeEnter (el) {
       // 设置transform值

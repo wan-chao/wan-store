@@ -1,14 +1,14 @@
 <template>
-  <div class="recommend-card" @click="goToDetail">
+  <div class="recommend-card">
     <div class="card-header">
       <span>今日疯抢</span>
       <a>查看更多 ></a>
     </div>
     <ul class="card-content">
-      <li v-for="item in goodsList" :key="item.title" class="goods-item">
-        <img v-lazy="item.img" width="100%">
-        <span class="one-line goods-detail">{{item.title}}</span>
-        <div class="goods-price">￥ <span>{{item.price}}</span> </div>
+      <li v-for="item in goodsList" :key="item.title" @click="goToDetail(item)" class="goods-item">
+        <img v-lazy="item.IMAGE1" :onerror="errorImg" width="100%" >
+        <span class="one-line goods-detail">{{item.NAME}}</span>
+        <div class="goods-price">￥ <span>{{item.ORI_PRICE}}</span> </div>
       </li>
     </ul>
   </div>
@@ -16,20 +16,22 @@
 
 <script>
 export default {
+  props:{
+    goodsList:{
+      type:Array,
+      default:()=>[]
+    }
+  },
   components: {
   },
   data(){
     return {
-      goodsList:[
-        {title:'光明纯奶24盒苗条装',price:'54.9',img:require('../../assets/images/goods01.png')},
-        {title:'楼兰蜜语甜甜枣500g',price:'6.9',img:require('../../assets/images/goods02.png')},
-        {title:'新边界五色葡萄干250g',price:'6.9',img:require('../../assets/images/goods03.png')}
-      ]
+      errorImg:require('../../assets/images/errorimg.png')
     }
   },
   methods:{
-    goToDetail(){
-      this.$router.push('/detail')
+    goToDetail(item){
+      this.$router.push({path:'/detail',query:{id:item.ID}})
     }
   }
 }

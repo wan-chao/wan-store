@@ -1,11 +1,15 @@
 <template>
   <div class="goods-card" @click="goToDetail">
-    <img v-lazy="goods.img" width="100%">
+    <van-image  lazy-load :src="goods.IMAGE1" class="goods-img">
+      <template v-slot:error >
+        <img :src="errorImg" class="goods-img">
+      </template>
+    </van-image>
     <ul class="goods-info">
-      <li class="goods-title">{{goods.title}}</li>
-      <li class="goods-msg">{{goods.msg}}</li>
+      <li class="goods-title one-line">{{goods.NAME}}</li>
+      <!-- <li class="goods-msg">{{goods.msg}}</li> -->
       <li class="goods-price">
-        ￥<span>{{goods.price}}</span>
+        ￥<span>{{goods.ORI_PRICE}}</span>
       </li>
     </ul>
   </div>
@@ -16,11 +20,12 @@ export default {
   props:['goods'],
   data(){
     return {
+      errorImg: require('../assets/images/errorimg.png')
     }
   },
   methods:{
     goToDetail(){
-      this.$router.push('/detail')
+      this.$router.push({path:'/detail',query:{id:this.goods.ID}})
     }
   }
 }
@@ -33,6 +38,10 @@ export default {
   margin-bottom: 20px;
   border-radius: 15px;
   background: #fff;
+  .goods-img{
+    width: 300px;
+    height: 300px;
+  }
 }
 .goods-info{
   padding: 20px 0;

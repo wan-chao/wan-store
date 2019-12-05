@@ -5,6 +5,9 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
+//在koa2里解决跨域的中间件
+const cors = require('koa2-cors')
+
 const mongoose = require('mongoose')
 const dbConfig = require('./database/config')
 
@@ -21,6 +24,7 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
+app.use(cors())
 
 // logger
 app.use(async (ctx, next) => {
