@@ -170,6 +170,20 @@ router.post('/getGoodsListByIdList',async(ctx)=>{
 })
 
 
+//关键字查询商品
+router.get('/getGoodsListByKeyword',async(ctx)=>{
+  try{
+    let result = await Goods.find({NAME:{$regex: '牛奶'}}).exec()
+    ctx.body={code:200,data:result}
+  }catch(error){
+    ctx.body = {
+      code:500,
+      message:error
+    }
+  }
+})
+
+
 
 
 

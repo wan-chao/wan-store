@@ -36,6 +36,11 @@ export default new Router({
       path: '/createAddress',
       name: 'createAddress',
       component: () => import('./views/CreateAddress.vue'),
+    },
+    {
+      path: '/other',
+      name: 'other',
+      component: () => import('./views/other/index.vue'),
     }
     // {
     //   path: '/',
