@@ -6,6 +6,9 @@ const CategorySub = require('../database/models/categorySub')
 
 router.prefix('/goods')
 
+ddddddddd
+test2d操作
+
 //导入本地json数据到数据库
 router.get('/insertAllGoodsInfo', (ctx)=> {
   fs.readFile('./data_json/newGoods.json',(err,data)=>{
