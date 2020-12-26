@@ -8,6 +8,8 @@ router.prefix('/goods')
 
 hhhhhh
 test1操作
+ddddddddd
+test2d操作
 
 //导入本地json数据到数据库
 router.get('/insertAllGoodsInfo', (ctx)=> {
