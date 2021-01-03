@@ -18,7 +18,7 @@ Vue.use(Button).use(Swipe).use(SwipeItem).use(Tabbar).use(TabbarItem).use(Tab).u
 
 Vue.config.productionTip = false
 
-// import Vconsole from 'vconsole'
+import Vconsole from 'vconsole'
 // let vConsole = new Vconsole()
 // Vue.use(vConsole)
 
